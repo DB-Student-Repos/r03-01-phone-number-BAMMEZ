@@ -1,5 +1,11 @@
-pub fn number(user_number: &str) -> Option<String> {
-    unimplemented!(
-        "Given the number entered by user '{user_number}', convert it into SMS-friendly format. If the entered number is not a valid NANP number, return None."
-    );
+pub fn number(input: &str) -> Option<String> {
+    let digits: String = input.chars().filter(|c| c.is_ascii_digit()).collect();
+
+    if digits.len() == 11 && digits.starts_with('1') {
+        Some(digits[1..].to_string())
+    } else if digits.len() == 10 {
+        Some(digits)
+    } else {
+        None
+    }
 }
